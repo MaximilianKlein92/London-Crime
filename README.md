@@ -29,8 +29,8 @@
   <a href="#-key-findings">Key Findings</a> •
   <a href="#-project-structure">Structure</a> •
   <a href="#-technologies">Technologies</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-visualizations">Visualizations</a>
+  <a href="#-dashboard">Dashboard</a> •
+  <a href="#-team">Team</a>
 </p>
 
 ---
