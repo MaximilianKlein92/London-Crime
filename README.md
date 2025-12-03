@@ -32,12 +32,11 @@
   <a href="#-dashboard">Dashboard</a> •
   <a href="#-team">Team</a>
 </p>
-
----
+</div>
 
 ## Project Overview
 
-This project provides a comprehensive analysis of crime patterns across London's 669 wards over a 24-month period (November 2023 - October 2025). By analyzing over 1.8 million crime incidents, we uncover spatial and temporal trends to support data-driven decision-making for public safety.
+Thiss project provides a comprehensive analysis of crime patterns across London's 669 wards over a 24-month period (November 2023 - October 2025). By analyzing over 1.8 million crime incidents, we uncover spatial and temporal trends to support data-driven decision-making for public safety.
 
 ### Objectives
 
@@ -206,7 +205,7 @@ data/
 
 ### Data Ethics & Privacy
 
-This project uses only publicly available, aggregated crime data published by the Greater London Authority. No personally identifiable information (PII) is included. All data is already anonymized and aggregated to ward level for privacy protection.
+This project uses only publicly available, aggregated crime data published by the Greater London Authority. No personally identifiable information is included. All data is already anonymized and aggregated to ward level for privacy protection.
 
 **License**: This data is licensed under the **UK Open Government Licence (OGL v2)**, which permits:
 - Free use (including commercial use)
@@ -365,10 +364,10 @@ This project focuses on:
 |-------------|-------------|--------------|--------|
 | * Cleaned Dataset** | Ward-level crime data (Nov 2023 - Oct 2025) | • 669 wards, 13 crime categories, 24 months<br>• Standardized formats, validated data<br>• 1.8M+ crimes aggregated |  Complete |
 | **Exploratory Data Analysis** | Comprehensive statistical analysis and hypothesis testing | • 3 hypotheses validated with p-values<br>• Time series decomposition<br>• Correlation analysis (78 crime pairs)<br>• Hierarchical clustering of wards |  Complete |
-| **Visualization Notebook** | Python-based charts, graphs, and statistical plots | • Temporal trends and seasonality<br>• Geographic crime distribution<br>• Crime category correlations<br>• Publication-ready figures | ✅ Complete |
+| **Visualization Notebook** | Python-based charts, graphs, and statistical plots | • Temporal trends and seasonality<br>• Geographic crime distribution<br>• Crime category correlations<br>• Publication-ready figures | Complete |
 | **Interactive Power BI Dashboard** | Public-facing crime exploration tool | • Ward and borough filtering<br>• Time series visualization<br>• Crime category breakdowns<br>• Comparative analytics |  Complete |
 | **Documentation** | Comprehensive project documentation | • README with full methodology<br>• Data dictionary and schema<br>• Hypothesis testing results<br>• Reproducibility instructions |  Complete |
-| **🔮 Predictive Models** | ~```````````• ~~~~~~~~~~~~~~~~~~~~~~<br>• Model performance metrics (R², MAE)<br>• Seasonality-aware predictions | In Progress |
+| ** Predictive Models** | ~```````````• ~~~~~~~~~~~~~~~~~~~~~~<br>• Model performance metrics (R², MAE)<br>• Seasonality-aware predictions | In Progress |
 
 ---
 
@@ -396,7 +395,7 @@ This project delivers measurable value to multiple stakeholder groups:
 - **Evidence-Based Policy**: Statistical rigor ensures policy decisions can be defended with data
 - **Accountability**: Clear metrics enable performance tracking and public accountability
 
-#### 5. **Proactive Planning** 🔮 *(in progress)*
+#### 5. **Proactive Planning**  *(in progress)*
 - **Predictive Forecasting**: `~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - **Early Warning System**: Identify wards with rising trends before they become critical
 - **Resource Pre-Allocation**: Deploy resources based on forecasts, not reactive responses
@@ -426,8 +425,7 @@ This project delivers measurable value to multiple stakeholder groups:
 
 Potential extensions to increase project value:
 
-- **Geospatial Visualization**: Interactive crime density maps with ward-level heatmaps using Folium or Leaflet
-- **Socioeconomic Integration**: Correlate crime patterns with ONS deprivation indices, unemployment, and housing data
+
 
 
 ## Project Plan
@@ -450,10 +448,6 @@ This project follows a structured data science workflow: **Plan → Collect → 
 - Three hypotheses for statistical validation
 - Success metrics definition
 
-**Key Decisions:**
-- **Ward-level analysis** chosen over LSOA for balance between granularity (669 wards) and manageability
-- **24-month window** provides sufficient data for seasonality detection while remaining current
-- **Statistical hypothesis testing** approach for credibility with policy-making stakeholders
 
 ---
 
@@ -463,7 +457,6 @@ This project follows a structured data science workflow: **Plan → Collect → 
 
 **Collection Strategy:**
 - Downloaded **MPS Ward Level Crime.csv** (Nov 2023 - Oct 2025)
-- Selected ward-level over LSOA to balance detail and computational efficiency
 - Verified data completeness: 669 wards × 13 crime categories × 24 months
 
 **Data Management:**
@@ -471,7 +464,10 @@ This project follows a structured data science workflow: **Plan → Collect → 
 data/
 ├── raw/              # Original downloaded CSV (read-only)
 ├── clean/            # Processed, analysis-ready data
-└── outputs/          # Analysis results and predictions  ~~~~~~~~~~~~~~~~~~~~~~~~~change in code the outputs destination folder
+\
+\
+\
+
 ```
 
 **Quality Checks:**
@@ -558,26 +554,19 @@ data/
 
 ---
 
-### Phase 6: Predictive Modeling 🔄 *In Progress*
+### Phase 6: Predictive Modeling  *In Progress*
 
 **Modeling Notebook** (`jupyter_notebooks/Crime_Prediction.ipynb`)
 
 **Approach:**
-1. **Baseline Model**: Linear regression (for comparison)
-2. **Time Series Models**: SARIMA and Prophet for seasonality handling
-3. **Validation Strategy**: Train/test split (18 months train, 6 months test)
-4. **Performance Metrics**: R², MAE, RMSE on test set
+1. **Baseline Model**: Linear regression 
+2. **Validation Strategy**: Train/test split (18 months train, 6 months test)
+4. **Performance Metrics**: MAE
 
-**Why SARIMA/Prophet:**
-- Linear regression achieved only R²=0.106 (fails to capture seasonality)
-- SARIMA explicitly models seasonal patterns (critical given H1 validation)
-- Prophet automatically handles seasonality and is robust to outliers
-- Both provide interpretable forecasts for stakeholder communication
 
 **Current Status:**
-- ✅ Baseline linear regression implemented and validated
-- 🔄 SARIMA/Prophet models in development
-- 🔄 Cross-validation and performance comparison pending
+-  Baseline linear regression implemented and validated
+
 
 ---
 
@@ -587,13 +576,12 @@ data/
 - Comprehensive README with methodology and findings
 - Jupyter notebooks with markdown explanations
 - Data dictionary and schema documentation
-- Reproducibility instructions (requirements.txt)
+- Reproducibility instructions (requirements.txt) (~~~~~ add geo)
 
 **Review Process:**
 - Code review and validation
 - Statistical assumptions verification
 - Visualization quality checks
-- Stakeholder feedback incorporation
 
 ---
 
@@ -657,13 +645,13 @@ data/
 
 | Phase | Status |
 |-------|--------|
-| Planning & Requirements | ✅ Complete |
-| Data Collection | ✅ Complete |
-| ETL | ✅ Complete |
-| Exploratory Data Analysis | ✅ Complete |
-| Visualization & Communication | ✅ Complete |
-| Predictive Modeling | 🔄 In Progress |
-| Documentation & Review | 🔄 In Progress |
+| Planning & Requirements | Complete |
+| Data Collection | Complete |
+| ETL | Complete |
+| Exploratory Data Analysis | Complete |
+| Visualization & Communication | Complete |
+| Predictive Modeling | Complete |
+| Documentation & Review | In Progress |
 
 **Data Management:**
 
