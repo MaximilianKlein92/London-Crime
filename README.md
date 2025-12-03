@@ -1,3 +1,5 @@
+<a name="top"></a>
+# 
 <div align="center">
   
   <br/>
@@ -31,6 +33,7 @@
 
 
 ---
+<a name="top"></a>
 
 ## Table of Contents
 
@@ -89,6 +92,12 @@ Understanding crime patterns helps:
 - **Communities** stay informed about safety in their areas
 - **Researchers** study urban crime dynamics
 - **Policy makers** design evidence-based interventions
+
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
 
 ## Dataset Content
 
@@ -234,6 +243,11 @@ This project uses only publicly available, aggregated crime data published by th
 
 **Attribution**: Contains data from the London Datastore, published by the Greater London Authority. Licensed under the UK Open Government Licence (OGL v2).
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
 
 ## Business Requirements
 
@@ -358,9 +372,9 @@ The project tests three key hypotheses using statistical and visual analytical m
 
 | Hypothesis | Visual Analysis | Statistical Test | Result | Status |
 |------------|----------------|------------------|--------|---------|
-| **H1: Temporal Patterns** | Time series decomposition (trend, seasonal, residual); Monthly trends | t-test (summer vs winter) | p=0.029, t=2.54 | ✅ **Strongly Supported** |
-| **H2: Crime Co-occurrence** | Correlation heatmap (13×13); Hierarchical clustering dendrogram (top 50 wards) | Pearson correlation (78 pairs) | 83% significant (p<0.05) | ✅ **Strongly Supported** |
-| **H3: Geographic Proximity** | Borough ranking bar chart; Crime distribution histogram (33 boroughs) | t-test (inner vs outer) | p=0.002, t=3.44 | ✅ **Moderately Supported** |
+| **H1: Temporal Patterns** | Time series decomposition (trend, seasonal, residual); Monthly trends | t-test (summer vs winter) | p=0.029, t=2.54 | **Strongly Supported** |
+| **H2: Crime Co-occurrence** | Correlation heatmap (13×13); Hierarchical clustering dendrogram (top 50 wards) | Pearson correlation (78 pairs) | 83% significant (p<0.05) | **Strongly Supported** |
+| **H3: Geographic Proximity** | Borough ranking bar chart; Crime distribution histogram (33 boroughs) | t-test (inner vs outer) | p=0.002, t=3.44 | **Moderately Supported** |
 
 **See**: `jupyter_notebooks/Crime_EDA.ipynb` for detailed analysis, code, visualizations, and full results.
 
@@ -444,7 +458,11 @@ This project delivers measurable value to multiple stakeholder groups:
 
 Potential extensions to increase project value:
 
+<div align="right">
 
+[⬆ Back to Top](#top)
+
+</div>
 
 
 ## Project Plan
@@ -865,6 +883,12 @@ This project employed a combination of descriptive statistics, inferential testi
 
 **AI tools enhanced efficiency** in ideation, coding, and documentation while requiring **careful validation** of outputs.
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
+
 ## Ethical Considerations
 
 ### Data Privacy
@@ -910,23 +934,52 @@ This project employed a combination of descriptive statistics, inferential testi
 
 This project prioritizes **transparency, privacy protection, and responsible communication**. All analysis uses publicly available, anonymized data with proper attribution. Bias mitigation strategies include neutral framing, contextual comparisons, and avoiding stigmatizing language or predictive profiling.
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
+
 ## Dashboard Design
 * List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
 * Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
 * How were data insights communicated to technical and non-technical audiences?
 * Explain how the dashboard was designed to communicate complex data insights to different audiences. 
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
+
 ## Unfixed Bugs
 * Please mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation are not valid reasons to leave bugs unfixed.
 * Did you recognise gaps in your knowledge, and how did you address them?
 * If applicable, include evidence of feedback received (from peers or instructors) and how it improved your approach or understanding.
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
+
 ## Development Roadmap
 * What challenges did you face, and what strategies were used to overcome these challenges?
 * What new skills or tools do you plan to learn next based on your project experience? 
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
+
 ## Deployment
 
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
 
 ## Main Data Analysis Libraries
 
@@ -1035,8 +1088,13 @@ print(f"Mean Absolute Error: {mae:.2f}")
 
 ---
 
-## Credits 
+<div align="right">
 
+[⬆ Back to Top](#top)
+
+</div>
+
+## Credits 
 
 
 ### Content 
@@ -1048,12 +1106,18 @@ print(f"Mean Absolute Error: {mae:.2f}")
 ### Media
 
 https://tenor.com/view/crime-scene-gif-12456734
+icons: https://www.pikpng.com/
 
 
 ## Team
 
 This project was developed collaboratively by **[Max](https://github.com/MaximilianKlein92)**, **[Jack](https://github.com/J-Bicheno)**, and **[Desi](https://github.com/desi0302)** – a fantastic learning experience built on strong teamwork and shared dedication.
 
+
+---
+
 <div align="center">
-  <a href="#-london-crime-analysis-">⬆️ Back to Top</a>
-</div>
+
+
+[⬆️ Back to Top](#-london-crime-analysis-) 
+
