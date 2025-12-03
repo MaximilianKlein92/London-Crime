@@ -34,6 +34,32 @@
 </p>
 </div>
 
+
+
+
+---
+
+## Table of Contents
+
+| Section | Description |
+|---------|-------------|
+| **[Project Overview](#project-overview)** | Objectives, dataset summary, key questions, and project significance |
+| **[Dataset Content](#dataset-content)** | Data source, structure, processing pipeline, and quality notes |
+| **[Business Requirements](#business-requirements)** | Stakeholder needs, business questions, and hypothesis validation |
+| **[Project Plan](#project-plan)** | Six-phase methodology from planning to deployment |
+| **[Rationale for Visualizations](#the-rationale-to-map-the-business-requirements-to-the-data-visualisations)** | Mapping business needs to visual analytics |
+| **[Analysis Techniques](#analysis-techniques-used)** | Statistical methods, tools, and analytical approaches |
+| **[Ethical Considerations](#ethical-considerations)** | Data privacy, bias mitigation, and legal compliance |
+| **[Dashboard Design](#dashboard-design)** | Interactive features and communication strategies |
+| **[Unfixed Bugs](#unfixed-bugs)** | Known issues and limitations |
+| **[Development Roadmap](#development-roadmap)** | Future enhancements and learning goals |
+| **[Deployment](#deployment)** | Hosting and accessibility information |
+| **[Main Libraries](#main-data-analysis-libraries)** | Core technologies and tools used |
+| **[Credits](#credits)** | Data sources and attribution |
+| **[Acknowledgements](#acknowledgements-optional)** | Team and contributors |
+
+---
+
 ## Project Overview
 
 Thiss project provides a comprehensive analysis of crime patterns across London's 669 wards over a 24-month period (November 2023 - October 2025). By analyzing over 1.8 million crime incidents, we uncover spatial and temporal trends to support data-driven decision-making for public safety.
@@ -684,18 +710,7 @@ data/
 * What new skills or tools do you plan to learn next based on your project experience? 
 
 ## Deployment
-### Heroku
 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
-* Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
-
-1. Log in to Heroku and create an App
-2. From the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
 
 ## Main Data Analysis Libraries
@@ -704,8 +719,7 @@ data/
 
 ## Credits 
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
+
 
 ### Content 
 
