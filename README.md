@@ -524,7 +524,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 - Downloaded **MPS Ward Level Crime.csv** (Nov 2023 - Oct 2025)
 - Verified data completeness: 669 wards × 13 crime categories × 24 months
 - Stored raw data in `data/raw/MPSCrime.csv`
-```
+
 
 **Quality Checks:**
 - Verified all 669 wards present across all 24 months
@@ -542,7 +542,6 @@ This project follows a structured data science workflow: **Plan → Collect → 
 2. **Column Renaming**: `WardName` → `ward_name`, `WardCode` → `ward_code`
 3. **Date Formatting**: Simplified date columns from `YYYY-MM-DD HH:MM:SS` to `YYYY-MM`
 4. **Validation**: Checked for duplicates, nulls, and data type consistency
-5. **Documentation**: Created data dictionary with column descriptions
 
 **Why This Approach:**
 - **Reproducibility**: Scripted pipeline can be rerun on updated data
@@ -557,7 +556,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 
 ### Phase 4: Exploratory Data Analysis (EDA)
 
-**EDA Notebook** (`jupyter_notebooks/Crime_EDA.ipynb`)
+**EDA Notebook** (`jupyter_notebooks/EDA.ipynb`)
 
 **Analysis Structure:**
 1. **Descriptive Statistics**: Summary stats, distributions, crime totals
@@ -592,7 +591,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 ### Phase 5: Visualization & Communication
 
 **Deliverables:**
-1. **Python Visualizations** (`jupyter_notebooks/Crime_Visualization.ipynb`)
+1. **Python Visualizations** (`jupyter_notebooks/EDA.ipynb`)
    - Temporal trends, geographic distributions, correlation heatmaps
    - Publication-ready figures with clear labels and annotations
 
@@ -607,6 +606,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 - **Interactivity**: Allow users to explore their areas of interest
 - **Accessibility**: Clear labels, colorblind-safe palettes
 - **Context**: Include comparisons (vs. London average, vs. previous year)
+- **Integration**: Incorporates ML predictions directly into visualizations
 
 ---
 
@@ -615,24 +615,23 @@ This project follows a structured data science workflow: **Plan → Collect → 
 **Modeling Notebook** (`jupyter_notebooks/Crime_Prediction.ipynb`)
 
 **Approach:**
-1. **Baseline Model**: Linear regression 
+1. **Baseline Model**: Linear regression with seasonal decomposition
 2. **Validation Strategy**: Train/test split (18 months train, 6 months test)
-4. **Performance Metrics**: MAE
-
+3. **Performance Metrics**: MAE (Mean Absolute Error)
+4. **Outputs**: Ward-level predictions and crime category frequency forecasts
 
 **Current Status:**
--  Baseline linear regression implemented and validated
-
-
+- ✓ Baseline linear regression implemented and validated
+- ✓ Predictions generated for 669 wards and 13 crime categories
+- ✓ Results integrated into Power BI dashboard
 ---
-
 ### Phase 7: Documentation & Review
 
 **Documentation:**
 - Comprehensive README with methodology and findings
 - Jupyter notebooks with markdown explanations
-- Data dictionary and schema documentation
-- Reproducibility instructions (requirements.txt) (~~~~~ add geo)
+- Project structure schema and file organization
+- Reproducibility instructions (requirements.txt, setup.sh)
 
 **Review Process:**
 - Code review and validation
@@ -662,7 +661,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 ### Data Management Throughout Project
 
 **Version Control:**
-- Git for code versioning (commit early, commit often)
+- Git for code versioning and collaboration
 - Raw data immutable (never overwritten)
 - Clear separation: raw → clean → outputs
 
@@ -691,8 +690,8 @@ This project follows a structured data science workflow: **Plan → Collect → 
 6. **Agile Collaboration**: Daily communication ensures team alignment and rapid problem-solving
 
 **Trade-offs Made:**
-- **Simplicity over sophistication**: Classical statistics over deep learning (better for explainability)
-- **24 months over longer history**: Recent data more relevant; sufficient for seasonality
+- **Simplicity over sophistication**: Linear regression over deep learning (better for explainability and transparency)
+- **24 months over longer history**: Recent data more relevant; sufficient for seasonality analysis
 
 ---
 
@@ -706,9 +705,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 | Exploratory Data Analysis | Complete |
 | Visualization & Communication | Complete |
 | Predictive Modeling | Complete |
-| Documentation & Review | In Progress |
-
-**Data Management:**
+| Documentation & Review | Complete |
 
 ## The Rationale to Map Business Requirements to Data Visualizations
 
@@ -729,13 +726,13 @@ This section explains how each business requirement was translated into specific
 | **Enable Self-Service Exploration** | Interactive Power BI dashboard<br>Filters and drill-downs | Empowers non-technical users to explore their areas of interest | Reduces dependency on analysts for routine queries |
 
 ---
-
 ### Visualization Design Principles
 
-**1. Simplicity**: Clear labels, limited colors (5-7 max) 
+**1. Simplicity**: Clear labels, limited colors (5-7 max), focused insights
 **2. Interactivity**: Power BI filters enable exploration by ward, borough, date, category  
 **3. Accessibility**: Colorblind-safe palettes, high contrast, screen reader support  
-**4. Evidence-Based**: Statistical annotations (p-values, confidence intervals) build trust  
+**4. Context**: Comparisons vs. London average and year-over-year changes
+**5. Evidence-Based**: Statistical annotations (p-values, confidence intervals) build trust
 
 ---
 
@@ -743,29 +740,42 @@ This section explains how each business requirement was translated into specific
 
 | Tool | Purpose | Why This Tool |
 |------|---------|---------------|
-| **Python (Matplotlib, Seaborn)** | Static publication-quality charts | Industry standard; reproducible; full customization |
-| **Power BI** | Interactive public dashboard | User-friendly for non-technical stakeholders; no coding required |
-| **Statsmodels/Scipy** | Statistical validation | Academic rigor for hypothesis testing |
+| **Python (Pandas, NumPy)** | Data processing and transformation | Industry standard for ETL; handles large datasets efficiently |
+| **Matplotlib, Seaborn** | Static publication-quality charts | Reproducible visualizations; full customization control |
+| **Statsmodels/Scipy** | Statistical validation | Academic rigor for hypothesis testing and time series analysis |
+| **Scikit-learn** | Predictive modeling | Standard ML library; linear regression with validation tools |
+| **Power BI** | Interactive public dashboard | User-friendly for non-technical stakeholders; integrates predictions seamlessly |
 
 ---
-
 ### Power BI Dashboard Structure
 
 **Progressive disclosure approach**: Overview → Drill-down → Detail
 
-1. **London Overview**: KPI cards, borough-level map, monthly trends
-2. **Geographic Deep Dive**: Ward-level maps, top/bottom 10, borough filters (enables targeted analysis)
-3. **Crime Categories**: Stacked bars, pie charts, category × location heatmap (shows "What types and where?")
-4. **Temporal Trends**: Seasonal patterns, year-over-year comparison, trend indicators (supports planning)
+1. **London Overview**: KPI cards (2M total crimes, 33 boroughs, 669 wards), crime trend over time, category breakdowns
+2. **Geographic Deep Dive**: Ward-level crime location map, top crime boroughs, spatial distribution analysis
+3. **Crime Categories**: Crime type group pie chart, category percentage bars, subcategory breakdowns (theft, vehicle offences)
+4. **Predictive Analytics**: 1-year forecast visualization, next month predictions, ward-level increase/decrease metrics
 
 ---
+
+### Dashboard Screenshots
+
+**Overview Page**
+![Dashboard Overview](images/dashboard_overview.png)
+
+**Predictive Analytics Page**
+![Predictive Analytics](images/dashboard_predictions.png)
+
+--- 
 
 ### Why Specific Visualizations Work
 
 **Line Charts for Trends**: Standard convention for time series; slopes show direction of change; seasonality visible  
 **Bar Charts for Rankings**: Immediate comparison of 669 wards; sorted for quick identification of extremes  
 **Heatmaps for Correlations**: 78 crime pairs (13×13) in one chart; color gradient reveals patterns instantly  
-**Box Plots for Comparisons**: Show full distribution (median, quartiles, outliers), not just averages  
+**Box Plots for Comparisons**: Show full distribution (median, quartiles, outliers), not just averages
+**Geographic Maps**: Spatial patterns reveal crime hotspots; dot density shows concentration across London
+**Pie Charts for Composition**: Crime type proportions (Property 46%, Person 20%, Other 34%) at a glance
 
 ---
 
@@ -783,7 +793,7 @@ By mapping requirements to appropriate visualizations, we ensure insights are **
 
 ### Overview
 
-This project employed a combination of descriptive statistics, inferential testing, and time series analysis to extract actionable insights from 1.8M+ crime records. Methods were chosen for interpretability and statistical rigor to support evidence-based decision-making.
+This project employed a combination of descriptive statistics, inferential testing, time series analysis, and machine learning to extract actionable insights from 1.8M+ crime records. Methods were chosen for interpretability and statistical rigor to support evidence-based decision-making.
 
 ---
 
@@ -796,7 +806,8 @@ This project employed a combination of descriptive statistics, inferential testi
 | **Independent Samples t-test** | Compare summer vs. winter; Inner vs. Outer London | Scipy (`ttest_ind`) | Assumes normality and equal variance; sensitive to outliers |
 | **Pearson Correlation** | Measure crime category co-occurrence (78 pairs) | Pandas, Seaborn | Only captures linear relationships; doesn't imply causation |
 | **Hierarchical Clustering** | Group wards by crime profiles | Scipy (`linkage`, `dendrogram`) | Sensitive to scaling; subjective cluster cutoff |
-| **Data Visualization** | Communicate patterns to stakeholders | Matplotlib, Seaborn, Plotly, Power BI | Power BI requires licensing |
+| **Linear Regression** | Forecast ward-level crime and category frequencies | Scikit-learn | Doesn't capture complex seasonality; assumes linear trends |
+| **Data Visualization** | Communicate patterns to stakeholders | Matplotlib, Seaborn, Power BI | Power BI requires licensing |
 
 ---
 
@@ -818,15 +829,10 @@ This project employed a combination of descriptive statistics, inferential testi
 - **Justification**: Provides evidence rigor for policy decisions
 
 **Phase 4: Predictive Modeling** 
-- Linear regression for crime forecasting
+- Linear regression for ward-level and category forecasting
 - Train/test split (18 months train, 6 months test)
-- **Justification**: Enables proactive resource planning
-
-**Why This Structure?**
-- **Hypothesis-driven**: Prevents data fishing; provides clear narrative
-- **Reproducible**: Jupyter notebooks document every step
-- **Stakeholder-aligned**: Methods chosen for interpretability over complexity
-
+- Performance evaluation using MAE
+- **Justification**: Enables proactive resource planning and early warning
 ---
 
 ### Data Limitations and Alternative Approaches
@@ -838,50 +844,22 @@ This project employed a combination of descriptive statistics, inferential testi
 | **Pre-aggregated format** | Cannot drill down to individual incidents | Accepted ward-level aggregation as sufficient for resource planning |
 | **24-month timeframe** | Limited historical context | Focused on recent patterns (more relevant for current planning) |
 | **No cleared crime data** | Cannot measure police effectiveness | Focused on crime occurrence, not resolution rates |
+| **Linear modeling approach** | Cannot capture complex seasonal patterns | Prioritized interpretability; flagged for future SARIMA/Prophet models |
 
 ---
 
 ### Use of Generative AI Tools
 
-#### **1. Ideation and Design Thinking**
-- **Tool**: Claude AI (Anthropic)
-- **Use Cases**:
-  - Brainstormed hypothesis formulations
-  - Explored alternative statistical tests (e.g., t-test vs. ANOVA)
-  - Discussed visualization best practices for non-technical audiences
-- **Example**: Asked "What statistical test should I use to compare Inner vs. Outer London crime?" → Suggested independent samples t-test with normality checks
+**Tools Used**: Claude AI, GitHub Copilot
 
-#### **2. Code Optimization**
-- **Tool**: GitHub Copilot, Claude AI
-- **Use Cases**:
-  - Optimized nested loops for performance
-  - Debugged Plotly visualization syntax
-- **Example**: Converted manual loop over wards to vectorized Pandas operations (10× speed improvement)
+**Applications**:
+- Code optimization and debugging (vectorized operations, visualization syntax)
+- Statistical method selection and validation
+- Documentation drafting and technical writing
+- Troubleshooting errors (KeyError, Power BI DAX, dendrogram formatting)
 
-#### **3. Documentation and Communication**
-- **Tool**: Claude AI
-- **Use Cases**:
-  - Drafted README sections
-  - Improved markdown explanations in Jupyter notebooks
-  - Generated docstrings for custom functions
-- **Example**: Asked "How do I explain correlation heatmaps to non-technical stakeholders?" → Received clear analogy and phrasing
-
-#### **4. Troubleshooting**
-- **Tool**: ChatGPT, Stack Overflow (AI-assisted search)
-- **Use Cases**:
-  - Resolved `KeyError` in time series indexing
-  - Fixed Power BI DAX formula syntax
-  - Debugged Scipy clustering dendrogram labels
-- **Example**: "Why is my dendrogram truncating ward names?" → Solution: Adjust `figsize` and `leaf_font_size` parameters
-
-**AI Limitations Encountered**:
-- Hallucinated non-existent Pandas functions (required manual verification)
-- Provided outdated syntax for older library versions
-- Excellent for conceptual explanations and pseudocode
-- Strong at suggesting alternative approaches
-
-**Best Practice**: Always validated AI-generated code against official documentation and tested on actual data.
-
+**Limitations**: Occasionally hallucinated functions or provided outdated syntax; all AI outputs validated against official documentation and tested on actual data.
+**AI tools enhanced efficiency** in ideation, coding, and documentation while requiring **careful validation** of outputs.
 ---
 ### Alternative Techniques Considered but Not Used
 
@@ -894,14 +872,6 @@ This project employed a combination of descriptive statistics, inferential testi
 | **K-means Clustering** | Alternative to hierarchical clustering | Dendrograms better show relationships between clusters |
 
 ---
-
-**Key limitations addressed**:
-- Aggregated data → Focused on monthly/seasonal patterns
-- No demographics → Used geographic proxies
-- Limited timeframe → Emphasized recent trends
-
-**AI tools enhanced efficiency** in ideation, coding, and documentation while requiring **careful validation** of outputs.
-
 <div align="right">
 
 [⬆ Back to Top](#top)
@@ -959,22 +929,24 @@ This project prioritizes **transparency, privacy protection, and responsible com
 
 </div>
 
-## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
-* How were data insights communicated to technical and non-technical audiences?
-* Explain how the dashboard was designed to communicate complex data insights to different audiences. 
-
-<div align="right">
-
-[⬆ Back to Top](#top)
-
-</div>
 
 ## Unfixed Bugs
-* Please mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation are not valid reasons to leave bugs unfixed.
-* Did you recognise gaps in your knowledge, and how did you address them?
-* If applicable, include evidence of feedback received (from peers or instructors) and how it improved your approach or understanding.
+
+**No critical bugs identified.** All analysis notebooks run successfully top-to-bottom with reproducible outputs.
+
+### Known Limitations
+
+**Power BI Refresh**: Dashboard requires manual data refresh when new crime data is released. Automated refresh would require Power BI Pro licensing and API integration with Metropolitan Police data source.
+
+**Linear Regression Seasonality**: Current model doesn't fully capture complex seasonal patterns. This is a modeling limitation rather than a bug - addressed in Future Enhancements (SARIMA/Prophet implementation).
+
+### Knowledge Gaps Addressed
+
+- **Time Series Decomposition**: Initially unfamiliar with `seasonal_decompose` parameters. Consulted Statsmodels documentation and experimented with additive vs. multiplicative models.
+- **Hierarchical Clustering**: Required understanding of linkage methods (ward, average, complete). Tested multiple approaches and validated with dendrogram visualization.
+- **Power BI DAX Formulas**: Learned DAX syntax for calculated columns (percentage increases, trend indicators) through Microsoft documentation and community forums.
+
+All gaps were resolved through official documentation, experimentation, and peer collaboration with Max and Jack.
 
 <div align="right">
 
@@ -983,8 +955,18 @@ This project prioritizes **transparency, privacy protection, and responsible com
 </div>
 
 ## Development Roadmap
-* What challenges did you face, and what strategies were used to overcome these challenges?
-* What new skills or tools do you plan to learn next based on your project experience? 
+
+### Challenges and Solutions
+
+| Challenge | Strategy Used |
+|-----------|--------------|
+| **Large Dataset Processing (1.8M records)** | Vectorized Pandas operations instead of loops; reduced processing time by 10× |
+| **669 Wards Visualization** | Used hierarchical clustering to group similar wards; created top/bottom 10 rankings for clarity |
+| **Statistical Validation** | Verified assumptions (normality, equal variance) before t-tests; used both visual and statistical checks |
+| **Non-Technical Communication** | Designed progressive disclosure dashboard; avoided technical jargon in labels; added context (vs. average) |
+| **Power BI Integration** | Exported model predictions to CSV; imported into Power BI for seamless visualization |
+| **Team Coordination** | Daily standups; clear task division across notebooks |
+
 
 <div align="right">
 
@@ -993,6 +975,22 @@ This project prioritizes **transparency, privacy protection, and responsible com
 </div>
 
 ## Deployment
+
+### Current Deployment Status
+
+**Local Deployment**: Project is fully functional on local machines with Python environment setup via `requirements.txt`.
+
+**Dashboard Distribution**: Power BI dashboard (`.pbix` file) can be shared with stakeholders who have Power BI Desktop installed.
+
+### Deployment Considerations
+
+**Not Web-Deployed**: This is an analytical project with Jupyter notebooks and a Power BI dashboard, not a web application requiring server deployment.
+
+**Reproducibility**: Any team member or stakeholder can:
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Execute notebooks in order: ETL → EDA → Crime_Prediction
+4. Open `LondonCrimeDash v1.2.pbix` in Power BI Desktop
 
 <div align="right">
 
@@ -1006,13 +1004,13 @@ This project prioritizes **transparency, privacy protection, and responsible com
 
 | Library | Purpose | Key Usage Example |
 |---------|---------|-------------------|
-| **Pandas** | Data manipulation and analysis | `df = pd.read_csv("data/raw/MPSCrime.csv")` - Load 18,693 rows of crime data |
-| **NumPy** | Numerical operations | `np.mean()`, `np.std()` - Calculate summary statistics |
+| **Pandas** | Data manipulation and analysis | `pd.read_csv()` - Load and transform 1.8M crime records |
+| **NumPy** | Numerical operations | `np.mean()`, `np.std()` - Calculate summary statistics across 669 wards |
 | **Matplotlib** | Static visualizations | `plt.plot()` - Create line charts for temporal trends |
-| **Seaborn** | Statistical visualizations | `sns.heatmap(crime_corr, annot=True, cmap='coolwarm')` - Visualize 13×13 crime correlation matrix |
-| **Statsmodels** | Time series analysis | `seasonal_decompose(monthly_crimes, period=6)` - Extract trend and seasonality components |
-| **Scipy** | Statistical testing | `ttest_ind(summer_crimes, winter_crimes)` - Compare seasonal crime levels (p=0.029) |
-| **Scikit-learn** | Machine learning | `LinearRegression().fit(X_train, y_train)` - Build predictive models for crime forecasting |
+| **Seaborn** | Statistical visualizations | `sns.heatmap()` - Visualize 13×13 crime correlation matrix |
+| **Statsmodels** | Time series analysis | `seasonal_decompose()` - Extract trend and seasonality components |
+| **Scipy** | Statistical testing & clustering | `ttest_ind()` - Compare Inner vs Outer London (p=0.002); `linkage()` - Hierarchical clustering |
+| **Scikit-learn** | Machine learning | `LinearRegression()` - Forecast ward-level crime and category frequencies |
 
 ---
 
@@ -1115,28 +1113,66 @@ print(f"Mean Absolute Error: {mae:.2f}")
 
 ## Credits 
 
+### Data Source
+- **Metropolitan Police Service (MPS)**: Ward-level crime data (Nov 2023 - Oct 2025)
+- **London Datastore**: [Statistical GIS boundary files and ward centroids](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-for-london-20od9/)
+
+### Tools & Technologies
+- **Anthropic Claude AI**: Assisted with code optimization, statistical guidance, and documentation
+- **GitHub Copilot**: Code completion and debugging support
+- **Power BI**: Interactive dashboard platform by Microsoft
+- **Python Community**: Open-source libraries (Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, Statsmodels, Scipy)
+
+### Learning Resources
+- **Statsmodels Documentation**: Time series decomposition guidance
+- **Scikit-learn Documentation**: Machine learning implementation best practices
+- **Stack Overflow Community**: Troubleshooting technical issues
+
+### Acknowledgments
+Special thanks to the open data movement and the Metropolitan Police Service for making crime data publicly accessible, enabling evidence-based analysis for community safety.
+
+---
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
+
+---
 
 ### Content 
 
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+- Crime data methodology and definitions referenced from [Metropolitan Police Service official documentation](https://www.met.police.uk/)
+- Statistical testing approaches informed by [Statsmodels documentation](https://www.statsmodels.org/)
+- Dashboard design principles adapted from [Power BI best practices](https://docs.microsoft.com/en-us/power-bi/)
+---
+<div align="right">
+
+[⬆ Back to Top](#top)
+
+</div>
 
 ### Media
 
-https://tenor.com/view/crime-scene-gif-12456734
-icons: https://www.pikpng.com/
+- Handcuff icon in the dashboard: [PikPNG](https://www.pikpng.com/)
+- README banner: AI-generated code via Claude Code (Anthropic)
+---
+<div align="right">
 
+[⬆ Back to Top](#top)
+
+</div>
 
 ## Team
 
 This project was developed collaboratively by **[Max](https://github.com/MaximilianKlein92)**, **[Jack](https://github.com/J-Bicheno)**, and **[Desi](https://github.com/desi0302)** – a fantastic learning experience built on strong teamwork and shared dedication.
 
-
 ---
+<div align="right">
 
-<div align="center">
+[⬆ Back to Top](#top)
+
+</div>
 
 
-[⬆️ Back to Top](#-london-crime-analysis-) 
 
