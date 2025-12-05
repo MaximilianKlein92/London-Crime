@@ -323,7 +323,7 @@ This project answers the following critical questions:
 - Which crime categories are growing vs. declining?
 - Are there emerging hotspots that need attention?
 
-#### 5. **Predictive Forecasting** *(In Progress)* ||||||||||||||||||||||||||||||||||
+#### 5. **Predictive Forecasting** 
 - What crime levels can we expect in the coming months?
 - Which wards are likely to see crime increases/decreases?
 - How can we proactively allocate resources based on forecasts?
@@ -402,7 +402,7 @@ The project tests three key hypotheses using statistical and visual analytical m
 | **H2: Crime Co-occurrence** | Correlation heatmap (13×13); Hierarchical clustering dendrogram (top 50 wards) | Pearson correlation (78 pairs) | 83% significant (p<0.05) | **Strongly Supported** |
 | **H3: Geographic Proximity** | Borough ranking bar chart; Crime distribution histogram (33 boroughs) | t-test (inner vs outer) | p=0.002, t=3.44 | **Moderately Supported** |
 
-**See**: `jupyter_notebooks/Crime_EDA.ipynb` for detailed analysis, code, visualizations, and full results.
+**See**: `jupyter_notebooks/EDA.ipynb` for detailed analysis, code, visualizations, and full results.
 
 
 ### Project Scope & Delivarables
