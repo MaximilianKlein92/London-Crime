@@ -58,7 +58,7 @@
 
 ## Project Overview
 
-Thiss project provides a comprehensive analysis of crime patterns across London's 669 wards over a 24-month period (November 2023 - October 2025). By analyzing over 1.8 million crime incidents, we uncover spatial and temporal trends to support data-driven decision-making for public safety.
+This project provides a comprehensive analysis of crime patterns across London's 669 wards over a 24-month period (November 2023 - October 2025). By analyzing over 1.8 million crime incidents, we uncover spatial and temporal trends to support data-driven decision-making for public safety.
 
 ### Objectives
 
@@ -221,14 +221,40 @@ Based on the **updated Home Office crime classifications** (introduced March 201
   - Data represents recorded crimes (not all crimes may be reported to police)
   - Ward boundaries based on current ONS definitions
 
-### File Locations
+## Project Structure
 ```
-data/
-├── raw/                          
-│   └── MPSCrime.csv              # Original downloaded data
-├── clean/
-│   ├── processed_crime_data.csv  # Main dataset (2.5 MB)
-
+LONDON-CRIME/
+├── dashboard/
+│   └── LondonCrimeDash v1.2.pbix           # Power BI dashboard file
+│
+├── data/
+│   ├── clean/
+│   │   └── processed_crime_data.csv        # Cleaned crime dataset (1.8M records)
+│   ├── raw/
+│   │   └── MPSCrime.csv                    # Original Metropolitan Police data
+│── Geo/
+│       ├── London_Ward.dbf                 # Ward boundary shapefiles
+│       ├── London_Ward.prj
+│       ├── London_Ward.shp
+│       ├── London_Ward.shx
+│       └── london_wards_centroids.csv      # Geographic coordinates for wards
+│
+├── images/
+│   ├── bingbong                            # Project images
+│   └── police_tape.gif
+│
+├── jupyter_notebooks/
+│   ├── ETL.ipynb                           # Data cleaning and transformation
+│   ├── EDA.ipynb                           # Exploratory data analysis
+│   └── Crime_Prediction.ipynb              # ML predictive modeling
+│
+├── model_outputs/
+│   ├── crime_category_frequency_1year_predictions.csv   # Category predictions
+│   └── ward_crime_pct_increase_predictions.csv          # Ward-level predictions
+│
+├── requirements.txt                        # Python dependencies
+├── setup.sh                                # Environment setup script
+└── README.md                               # Project documentation
 ```
 
 ### Data Ethics & Privacy
@@ -398,9 +424,9 @@ This project focuses on:
 | * Cleaned Dataset** | Ward-level crime data (Nov 2023 - Oct 2025) | • 669 wards, 13 crime categories, 24 months<br>• Standardized formats, validated data<br>• 1.8M+ crimes aggregated |  Complete |
 | **Exploratory Data Analysis** | Comprehensive statistical analysis and hypothesis testing | • 3 hypotheses validated with p-values<br>• Time series decomposition<br>• Correlation analysis (78 crime pairs)<br>• Hierarchical clustering of wards |  Complete |
 | **Visualization Notebook** | Python-based charts, graphs, and statistical plots | • Temporal trends and seasonality<br>• Geographic crime distribution<br>• Crime category correlations<br>• Publication-ready figures | Complete |
-| **Interactive Power BI Dashboard** | Public-facing crime exploration tool | • Ward and borough filtering<br>• Time series visualization<br>• Crime category breakdowns<br>• Comparative analytics |  Complete |
+| **Interactive Power BI Dashboard** | Public-facing crime exploration tool | • Ward and borough filtering<br>• Time series visualization<br>• Crime category breakdowns<br>• Comparative analytics<br>• Geographic heat mapping<br>• Predictive forecasts display |  Complete |
 | **Documentation** | Comprehensive project documentation | • README with full methodology<br>• Data dictionary and schema<br>• Hypothesis testing results<br>• Reproducibility instructions |  Complete |
-| ** Predictive Models** | ~```````````• ~~~~~~~~~~~~~~~~~~~~~~<br>• Model performance metrics (R², MAE)<br>• Seasonality-aware predictions | In Progress |
+| **Predictive Models** | Machine learning forecasting system | • Ward-level crime predictions<br>• Crime category frequency forecasts<br>• Model performance metrics (MAE)<br>• Seasonality-aware predictions | Complete |
 
 ---
 
@@ -428,8 +454,8 @@ This project delivers measurable value to multiple stakeholder groups:
 - **Evidence-Based Policy**: Statistical rigor ensures policy decisions can be defended with data
 - **Accountability**: Clear metrics enable performance tracking and public accountability
 
-#### 5. **Proactive Planning**  *(in progress)*
-- **Predictive Forecasting**: `~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#### 5. **Proactive Planning**
+- **Predictive Forecasting**: ML models forecast ward-level crime rates and category frequencies for future months
 - **Early Warning System**: Identify wards with rising trends before they become critical
 - **Resource Pre-Allocation**: Deploy resources based on forecasts, not reactive responses
 
@@ -449,14 +475,17 @@ This project delivers measurable value to multiple stakeholder groups:
 | **Temporal Coverage** | Annual snapshots | 24-month continuous time series | Monthly trend analysis enabled |
 | **Crime Category Analysis** | Limited breakdowns | 13 major categories + subcategories | Comprehensive category insights |
 | **Stakeholder Accessibility** | Static PDF reports | Interactive Power BI dashboard | Self-service exploration |
-| **Forecasting Capability** | None | Predictive models *(in progress)* | Proactive planning enabled |
+| **Forecasting Capability** | None | ML models with ward & category predictions | Proactive planning enabled |
 | **Reproducibility** | Manual, one-off analysis | Automated Jupyter notebooks | Repeatable monthly updates |
 
 ---
-
 ### Future Enhancements
 
 Potential extensions to increase project value:
+
+- **Advanced ML Models**: Explore LSTM or Prophet for improved forecast accuracy
+- **Web-Based Prediction Tool**: Deploy interactive application for stakeholders to generate custom forecasts
+- **Resource Optimization**: Use predictions to recommend optimal police deployment strategies
 
 <div align="right">
 
@@ -485,7 +514,6 @@ This project follows a structured data science workflow: **Plan → Collect → 
 - Three hypotheses for statistical validation
 - Success metrics definition
 
-
 ---
 
 ### Phase 2: Data Collection
@@ -495,16 +523,7 @@ This project follows a structured data science workflow: **Plan → Collect → 
 **Collection Strategy:**
 - Downloaded **MPS Ward Level Crime.csv** (Nov 2023 - Oct 2025)
 - Verified data completeness: 669 wards × 13 crime categories × 24 months
-
-**Data Management:**
-```
-data/
-├── raw/              # Original downloaded CSV (read-only)
-├── clean/            # Processed, analysis-ready data
-\
-\
-\
-
+- Stored raw data in `data/raw/MPSCrime.csv`
 ```
 
 **Quality Checks:**
@@ -516,7 +535,7 @@ data/
 
 ### Phase 3: ETL (Extract, Transform, Load)
 
-**ETL Pipeline** (`jupyter_notebooks/Data_Collection.ipynb`)
+**ETL Pipeline** (`jupyter_notebooks/ETL.ipynb`)
 
 **Transformation Steps:**
 1. **Standardization**: Lowercase column names, replace spaces with underscores
