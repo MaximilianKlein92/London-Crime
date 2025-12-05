@@ -10,3 +10,5 @@ cloudinary_python.txt
 kaggle.json
 .venv/
 banner.py
+jupyter_notebooks/.ipynb_checkpoints/
+
