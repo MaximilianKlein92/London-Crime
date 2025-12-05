@@ -1176,15 +1176,15 @@ This project was developed collaboratively by **[Max](https://github.com/Maximil
 
 </div>
 
-## 📓 Jupyter Notebooks
+## Jupyter Notebooks
 
 GitHub's notebook viewer can be unreliable. Use these nbviewer links for guaranteed access:
 
 | Notebook | Description | View |
 |----------|-------------|------|
-| **ETL.ipynb** | Data cleaning and transformation | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/desi0302/London-Crime/blob/main/jupyter_notebooks/ETL.ipynb) |
-| **EDA.ipynb** | Exploratory data analysis and hypothesis testing | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/desi0302/London-Crime/blob/main/jupyter_notebooks/EDA.ipynb) |
-| **Crime_Prediction.ipynb** | Predictive modeling and forecasting | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/desi0302/London-Crime/blob/main/jupyter_notebooks/Crime_Prediction.ipynb) |
+| **ETL.ipynb** | Data cleaning and transformation | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/ETL.ipynb) |
+| **EDA.ipynb** | Exploratory data analysis and hypothesis testing | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/EDA.ipynb) |
+| **Crime_Prediction.ipynb** | Predictive modeling and forecasting | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/Crime_Prediction.ipynb) |
 
 *Note: Click the orange nbviewer badges to view rendered notebooks*
 
