@@ -779,15 +779,60 @@ This section explains how each business requirement was translated into specific
 
 ---
 
-### Summary
+## Key Visualizations
 
-Every visualization serves a specific business purpose based on:
-- **Stakeholder needs**: Who uses it and what decisions they make
-- **Data type**: Temporal, categorical, or geographic
-- **Accessibility**: Simple enough for non-technical audiences
-- **Actionability**: Leads to clear, evidence-based decisions
+The following visualizations highlight critical patterns discovered during ETL and EDA phases and demonstrate the analytical methods used to understand London's crime landscape.
 
-By mapping requirements to appropriate visualizations, we ensure insights are **accessible, accurate, and actionable** for police, policy makers, and the public.
+### 1. Crime Category Time Series Overview
+![Crimes by Category over Time](images/plot1.png)
+
+*Multi-series time series showing all 34 specific crime types across the 24-month period. Violence Without Injury (~10,000-11,000 monthly), Other Theft (~9,000-10,000), and Shoplifting (~7,000-8,000) emerge as the dominant crime categories, collectively driving overall crime trends. Most categories show relative stability with moderate seasonal fluctuations.*
+
+---
+
+### 2. Crime Category Correlations & Top 5 Temporal Patterns
+![Correlation and Temporal Analysis](images/plot2.png)
+
+**Left - Correlation Heatmap**: Reveals strong positive correlations (0.80-0.96) between most crime categories, indicating they tend to rise and fall together. This suggests common underlying drivers such as seasonal patterns, economic conditions, or policing strategies affect multiple crime types simultaneously.
+
+**Right - Top 5 Crime Categories**: Theft dominates with distinct seasonal peaks, while Violence Against the Person shows an upward trend. Public Order Offences and Arson/Criminal Damage remain relatively stable, demonstrating different behavioral patterns across crime types.
+
+---
+
+### 3. Time Series Decomposition
+![Time Series Decomposition](images/plot3.png)
+
+**Method Explanation**: Time series decomposition separates crime data into three components to understand different patterns:
+- **Trend**: Long-term direction showing gradual increase from ~73,000 to ~78,000 crimes
+- **Seasonal**: Repeating 6-month pattern with winter dips (January-February) and summer peaks (July-August)
+- **Residual**: Random unexplained variation after removing trend and seasonality
+
+This statistical technique allows us to isolate and quantify the 6% seasonal increase confirmed in hypothesis testing (p=0.029), making complex patterns accessible to non-technical stakeholders.
+
+---
+
+### 4. Hierarchical Clustering of London Wards
+![Hierarchical Clustering Dendrogram](images/plot4.png)
+
+**Method Explanation**: Hierarchical clustering groups London's top 50 wards by crime similarity using Ward's linkage method. The dendrogram (tree diagram) works like a family tree:
+- **Low connection heights** (bottom): Wards with very similar crime patterns (e.g., West End wards cluster together due to high theft and public order crimes)
+- **High connection heights** (top): Wards with different crime profiles
+- **Reading the chart**: The distance at which wards connect indicates how similar their crime patterns are
+
+West End (far left, orange) connects at the top level, indicating its unique crime profile—dominated by theft and public order offences unlike any other London area. This clustering reveals natural crime "neighborhoods" that transcend administrative boundaries.
+
+---
+
+### 5. Crime Distribution Across London Boroughs
+![Borough Crime Analysis](images/plot5.png)
+
+**Left - Total Crime by Borough**: Westminster dramatically exceeds all other boroughs with ~180,000 total crimes (3x the median), driven by its status as London's tourist, entertainment, and commercial center. Most boroughs cluster around 50,000-60,000 crimes.
+
+**Right - Distribution Analysis**: The histogram shows crime is relatively evenly distributed across most boroughs (centered around the median of 52,711), with Westminster as a clear outlier requiring specialized policing strategies.
+
+---
+
+These visualizations informed our hypothesis testing, predictive modeling, and Power BI dashboard design, ensuring data-driven insights guide both analysis and stakeholder communication.
 
 ## Analysis Techniques Used
 
@@ -934,21 +979,59 @@ This project prioritizes **transparency, privacy protection, and responsible com
 
 ## Unfixed Bugs
 
-**No critical bugs identified.** All analysis notebooks run successfully top-to-bottom with reproducible outputs.
+### GitHub Notebook Rendering Issue (December 2025)
 
-### Known Limitations
+**Issue**: GitHub's native notebook viewer intermittently fails to render `ETL.ipynb`, displaying only a blank page.
 
-**Power BI Refresh**: Dashboard requires manual data refresh when new crime data is released. Automated refresh would require Power BI Pro licensing and API integration with Metropolitan Police data source.
+**Root Cause**: This is a known limitation of GitHub's notebook rendering service, not a problem with the notebook file itself. The issue occurs when:
+- Notebooks contain large outputs or visualizations
+- GitHub's rendering servers are under heavy load
+- Network timeouts occur during the rendering process
 
-**Linear Regression Seasonality**: Current model doesn't fully capture complex seasonal patterns. This is a modeling limitation rather than a bug - addressed in Future Enhancements (SARIMA/Prophet implementation).
+**Impact**: Users clicking on `ETL.ipynb` in the GitHub repository may encounter rendering failures, making the notebook appear inaccessible or broken.
 
-### Knowledge Gaps Addressed
+**Workarounds**: Multiple reliable alternatives exist to view the notebook:
 
-- **Time Series Decomposition**: Initially unfamiliar with `seasonal_decompose` parameters. Consulted Statsmodels documentation and experimented with additive vs. multiplicative models.
-- **Hierarchical Clustering**: Required understanding of linkage methods (ward, average, complete). Tested multiple approaches and validated with dendrogram visualization.
-- **Power BI DAX Formulas**: Learned DAX syntax for calculated columns (percentage increases, trend indicators) through Microsoft documentation and community forums.
+1. **NBViewer (Recommended)**: Use the dedicated rendering service below
+2. **GitHub Raw View**: Click the "Raw" button on the GitHub file page to view the JSON structure
+3. **Local IDE**: Clone the repository and open in VS Code or Jupyter—the notebook executes fully without issues
 
-All gaps were resolved through official documentation, experimentation, and peer collaboration with Max and Jack.
+| Notebook | Description | Reliable Access |
+|----------|-------------|-----------------|
+| **ETL.ipynb** | Data cleaning and transformation | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/ETL.ipynb) |
+| **EDA.ipynb** | Exploratory data analysis and hypothesis testing | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/EDA.ipynb) |
+| **Crime_Prediction.ipynb** | Predictive modeling and forecasting | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/Crime_Prediction.ipynb) |
+
+*Click the orange nbviewer badges for guaranteed notebook access*
+
+**Verification**: The notebook file itself is valid and uncorrupted—it opens and executes successfully in VS Code, JupyterLab, and other local environments. The issue is exclusively with GitHub's web-based rendering service.
+
+**Status**: Cannot be fixed on our end as it's a GitHub infrastructure limitation. The nbviewer links and local IDE execution provide permanent, reliable solutions.
+
+---
+
+## Known Limitations
+
+**Power BI Dashboard Refresh**: The dashboard requires manual data refresh when new monthly crime statistics are released by the Metropolitan Police Service. Automated refresh functionality would require:
+- Power BI Pro licensing (currently using free tier)
+- API integration with Metropolitan Police data source
+- Scheduled gateway configuration
+
+**Linear Regression Seasonality Capture**: The current linear regression model shows limited ability to capture complex seasonal crime patterns. This is an expected modeling limitation rather than a bug—linear models assume constant relationships over time and cannot adapt to cyclical variations. Addressed in Future Enhancements through SARIMA and Prophet implementations, which are specifically designed for seasonal time series.
+
+---
+
+## Knowledge Gaps Addressed
+
+Throughout this project, the team encountered and successfully resolved several technical learning challenges:
+
+**Time Series Decomposition**: Initially unfamiliar with `seasonal_decompose` function parameters and the distinction between additive vs. multiplicative models. Resolved through Statsmodels documentation study and systematic experimentation with both approaches on our crime data to determine which better fit the underlying patterns.
+
+**Hierarchical Clustering**: Required understanding of linkage methods (Ward, average, complete) and their impact on dendrogram structure. Tested all three methods on our ward-level crime data and selected Ward linkage based on its ability to create balanced, interpretable clusters validated through dendrogram visualization.
+
+**Power BI DAX Formulas**: Learned DAX syntax for calculated columns including percentage increases, year-over-year comparisons, and trend indicators. Progressed from basic calculated columns to complex measures through Microsoft's official DAX documentation, Power BI community forums, and collaborative debugging sessions.
+
+All knowledge gaps were systematically addressed through official documentation, hands-on experimentation, and team collaboration, resulting in robust implementations across all project components.
 
 <div align="right">
 
@@ -1176,16 +1259,6 @@ This project was developed collaboratively by **[Max](https://github.com/Maximil
 
 </div>
 
-## Jupyter Notebooks
 
-GitHub's notebook viewer can be unreliable. Use these nbviewer links for guaranteed access:
-
-| Notebook | Description | View |
-|----------|-------------|------|
-| **ETL.ipynb** | Data cleaning and transformation | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/ETL.ipynb) |
-| **EDA.ipynb** | Exploratory data analysis and hypothesis testing | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/EDA.ipynb) |
-| **Crime_Prediction.ipynb** | Predictive modeling and forecasting | [![nbviewer](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/MaximilianKlein92/London-Crime/blob/main/jupyter_notebooks/Crime_Prediction.ipynb) |
-
-*Note: Click the orange nbviewer badges to view rendered notebooks*
 
 
