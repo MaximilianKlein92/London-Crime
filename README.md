@@ -1004,6 +1004,9 @@ This project prioritizes **transparency, privacy protection, and responsible com
 
 *Click the orange nbviewer badges for guaranteed notebook access*
 
+*GitHub API Rate Limiting*:
+*Users may occasionally encounter "503: Service Unavailable - GitHub API rate limit exceeded" errors. This is a temporary GitHub infrastructure limitation that affects API requests, not the repository content itself. Wait 1 hour for the rate limit to reset, or authenticate with GitHub CLI for higher limits.*
+
 **Verification**: The notebook file itself is valid and uncorrupted—it opens and executes successfully in VS Code, JupyterLab, and other local environments. The issue is exclusively with GitHub's web-based rendering service.
 
 **Status**: Cannot be fixed on our end as it's a GitHub infrastructure limitation. The nbviewer links and local IDE execution provide permanent, reliable solutions.
